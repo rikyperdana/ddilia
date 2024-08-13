@@ -9,6 +9,7 @@ comps.inference = x => [
   m('article.message', m('.message-body', m('p', m.trust(
     marked.parse(state.inferenceResult || '')
   )))),
+  state.isLoading && m('progress.progress'),
   m(autoForm({
     id: 'inference',
     schema: {
@@ -18,6 +19,7 @@ comps.inference = x => [
       }
     },
     action: doc => [
+      state.isLoading = true,
       (new state.aiModule.GoogleGenerativeAI(gemApi))
       .getGenerativeModel({
         model: fineTunedModel,
@@ -25,6 +27,7 @@ comps.inference = x => [
       })
       .generateContent(doc.inference)
       .then(({response}) => [
+        state.isLoading = false,
         _.assign(state, {
           inferenceResult: [
             withAs(
