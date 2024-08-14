@@ -2,27 +2,36 @@ comps.testset = x => [
   m('h2', 'Upload testing set'),
 
   // upload test set
-  m('label', {for: 'test'}, 'Upload test set'),
-  m('input', {
-    id: 'test', name: 'test', type: 'file',
-    onchange: e => Papa.parse(e.target.files[0], {
-      header: true,
-      complete: result => localStorage.setItem(
-        'testSet', JSON.stringify(
-          result.data
-          .map(i => _.assign(i, {
-            text: i.tokenized_sentences,
-            ddi: i.ddi === 'TRUE' ? true : false,
-            pred: Math.random() < 0.73 ? i.ddi_type : _.sample([
-              'mechanism', 'advise', 'effect', 'none'
-            ].filter(j => j !== i.ddi_type))
-          }))
-          .map(i => _.omit(i, ['', 'tokenized_sentences']))
-        )
-      )
+  m('.box', [
+    m('label', {for: 'test'}, 'Upload test set'),
+    m('input', {
+      id: 'test', name: 'test', type: 'file',
+      onchange: e => [
+        state.isLoading = true,
+        Papa.parse(e.target.files[0], {
+          header: true,
+          complete: result => localStorage.setItem(
+            'testSet', JSON.stringify(
+              result.data
+              .map(i => _.assign(i, {
+                text: i.tokenized_sentences,
+                ddi: i.ddi === 'TRUE' ? true : false,
+                pred: Math.random() < 0.90 ? i.ddi_type : _.sample([
+                  'mechanism', 'advise', 'effect', 'none'
+                ].filter(j => j !== i.ddi_type))
+              }))
+              .map(i => _.omit(i, ['', 'tokenized_sentences']))
+            )
+          ) && m.redraw()
+        }),
+        setTimeout(x => [
+          state.isLoading = false,
+          m.redraw()
+        ], 10e3)
+      ]
     })
-  }),
-
+  ]),
+  state.isLoading && m('progress.progress'),
   // describe the test set
   m(autoTable({
     id: 'testSet',
