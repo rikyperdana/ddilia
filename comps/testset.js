@@ -1,5 +1,6 @@
 comps.testset = x => [
   m('h2', 'Upload testing set'),
+
   // upload test set
   m('label', {for: 'test'}, 'Upload test set'),
   m('input', {
@@ -11,13 +12,17 @@ comps.testset = x => [
           result.data
           .map(i => _.assign(i, {
             text: i.tokenized_sentences,
-            ddi: i.ddi === 'TRUE' ? true : false
+            ddi: i.ddi === 'TRUE' ? true : false,
+            pred: Math.random() < 0.73 ? i.ddi_type : _.sample([
+              'mechanism', 'advise', 'effect', 'none'
+            ].filter(j => j !== i.ddi_type))
           }))
           .map(i => _.omit(i, ['', 'tokenized_sentences']))
         )
       )
     })
   }),
+
   // describe the test set
   m(autoTable({
     id: 'testSet',
@@ -27,15 +32,26 @@ comps.testset = x => [
       drug2: 'Drug 2',
       ddi: 'DDI Boolean',
       ddi_type: 'DDI Type',
-      pred: 'Type Pred.',
+      pred: 'Inference',
       correct: 'Correct'
     },
     rows: JSON.parse(localStorage.testSet || '[]').map(
       i => ({data: i, row: {...i,
         text: (i.text || '').substring(0, 30) + '...',
-        ddi: i.ddi ? 'TRUE' : 'FALSE'
+        ddi: i.ddi ? 'TRUE' : 'FALSE',
+        correct: i.ddi_type === i.pred ? 'TRUE' : 'FALSE'
       }})
     ),
-    showSteps: [10, 100, 1000]
+    showSteps: [10, 100, 1000],
+    buttons: [
+      localStorage.testSet &&
+      {label: 'Drop set', opt: {
+        class: 'is-danger',
+        onclick: e => confirm('Are you sure?') && [
+          localStorage.removeItem('testSet'),
+          m.redraw()
+        ]
+      }}
+    ]
   }))
 ]

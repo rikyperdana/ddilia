@@ -23,7 +23,7 @@ comps.inference = x => [
       (new state.aiModule.GoogleGenerativeAI(gemApi))
       .getGenerativeModel({
         model: fineTunedModel,
-        generationConfig: {maxOutputTokens: 30}
+        generationConfig: {maxOutputTokens: 200}
       })
       .generateContent(doc.inference)
       .then(({response}) => [
@@ -38,9 +38,9 @@ comps.inference = x => [
                   effect: res[2], none: res[3]
                 }})
               ), null, 2),
-              codeBlock => "```"+codeBlock
+              codeBlock => "```" + codeBlock
             ),
-            response.text()
+            response.text().slice(100, 200)
           ].join('\n\n')
         }),
         m.redraw()
