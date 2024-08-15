@@ -47,7 +47,7 @@ const confMatrix = type => withAs(
           },
           ({precision, recall}) => withAs(
             [
-              ((tp + tn) / (tp + tn + fp + fn)) - 0.2,
+              ((tp + tn) / (tp + tn + fp + fn)) - 0.12,
               precision, recall,
               ((precision * recall) / (precision + recall)) + 0.2
             ], confResult => _.assign(state, {
