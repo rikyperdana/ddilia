@@ -1,0 +1,13 @@
+text,drug1,drug2,ddi,ddi_type
+in a study of 11 hiv-infected patients receiving drug1-maintenance therapy ( 40 mg and 90 mg daily ) with 600 mg of drug2 twice daily ( twice the currently recommended dose )  oral drug0 clearance increased 22 % ( 90 % ci 6 % to 42 % ) .,methadone,ziagen,TRUE,mechanism
+in a study of 11 hiv-infected patients receiving drug2-maintenance therapy ( 40 mg and 90 mg daily ) with 600 mg of drug1 twice daily ( twice the currently recommended dose )  oral drug0 clearance increased 22 % ( 90 % ci 6 % to 42 % ) .,ziagen,methadone,FALSE,none
+drug1 : concomitant drug0 administration decreased the mean auc of total drug2 approximately 55 % .,cholestyramine,ezetimibe,FALSE,none
+drug1 : concomitant drug0 administration decreased the mean auc of total drug2 approximately 55 % .,cholestyramine,ezetimibe,TRUE,mechanism
+the incremental ldl-c reduction due to adding drug1 to drug2 may be reduced by this interaction .,ezetimibe,cholestyramine,TRUE,effect
+co-administration of drug1 with drug2 is not recommended until use in patients is studied .,zetia,fibrates,TRUE,advise
+drug1 : in a pharmacokinetic study  concomitant drug0 administration increased total drug2 concentrations approximately 1.5-fold .,fenofibrate,ezetimibe,FALSE,none
+drug1 : in a pharmacokinetic study  concomitant drug0 administration increased total drug2 concentrations approximately 1.5-fold .,fenofibrate,ezetimibe,TRUE,mechanism
+drug1 : in a pharmacokinetic study  concomitant drug0 administration increased total drug2 concentrations approximately 1.7-fold .,gemfibrozil,ezetimibe,FALSE,none
+drug1 : in a pharmacokinetic study  concomitant drug0 administration increased total drug2 concentrations approximately 1.7-fold .,gemfibrozil,ezetimibe,FALSE,none
+drug1 : the total drug2 level increased 12-fold in one renal transplant patient receiving multiple medications  including drug0 .,cyclosporine,ezetimibe,FALSE,none
+drug2 : the total drug1 level increased 12-fold in one renal transplant patient receiving multiple medications  including drug0 .,ezetimibe,cyclosporine,TRUE,mechanism
